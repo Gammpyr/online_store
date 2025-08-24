@@ -1,7 +1,7 @@
 [
 {
     "model": "catalog.product",
-    "pk": 4,
+    "pk": 1,
     "fields": {
         "name": "Motorola",
         "description": "Телефон марки Motorola",
@@ -14,7 +14,7 @@
 },
 {
     "model": "catalog.product",
-    "pk": 5,
+    "pk": 2,
     "fields": {
         "name": "Sony Ericsson w810i",
         "description": "Sony Ericsson Walkman",
@@ -27,7 +27,7 @@
 },
 {
     "model": "catalog.product",
-    "pk": 7,
+    "pk": 3,
     "fields": {
         "name": "Nokia",
         "description": "Телефон марки Nokia",
@@ -40,7 +40,7 @@
 },
 {
     "model": "catalog.product",
-    "pk": 8,
+    "pk": 4,
     "fields": {
         "name": "Плазма",
         "description": "Плазменная панель",
@@ -53,7 +53,7 @@
 },
 {
     "model": "catalog.product",
-    "pk": 9,
+    "pk": 5,
     "fields": {
         "name": "Смарт-тв",
         "description": "Смарт-тв нового поколения",
@@ -66,7 +66,7 @@
 },
 {
     "model": "catalog.product",
-    "pk": 10,
+    "pk": 6,
     "fields": {
         "name": "Жидкокристалический",
         "description": "Плоский телевизор с матрицей на основе жидких кристаллов",
@@ -79,7 +79,7 @@
 },
 {
     "model": "catalog.product",
-    "pk": 11,
+    "pk": 7,
     "fields": {
         "name": "Сбер-ТВ",
         "description": "Смарт-тв от Сбер",
