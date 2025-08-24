@@ -1,0 +1,18 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 6,
+    "fields": {
+        "name": "Телефоны",
+        "description": "Тут описание категории телефонов"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 7,
+    "fields": {
+        "name": "Телевизоры",
+        "description": "Тут описание моделей телевизоров"
+    }
+}
+]
