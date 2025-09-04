@@ -1,0 +1,31 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Список продуктов{% endblock %}
+
+
+{% block content %}
+
+<div class="row text-center mx-auto">
+	{% for product in products %}
+	<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+		<div class="card mb-4 box-shadow">
+			<div class="card-header">
+				<h4 class="my-0 font-weight-normal">{{product.name}}</h4>
+			</div>
+			<div class="card-body">
+				{% if product.image %}
+					<img class="img-thumbnail rounded" style="max-width: 100%; max-height: 200px;" src={{product.image.url}} alt={{product.name}}>
+				{% endif %}
+				<h1 class="card-title pricing-card-title">{{product.price}}</h1>
+				<p>{{product.description|linebreaks|truncatechars:100}}</p>
+				<a class="btn btn-lg btn-block  btn-outline-info" href="product/{{product.id}}" role="button">Подробнее</a><br>
+				<button type="button" class="btn btn-lg btn-block btn-outline-primary mt-2">Купить</button>
+
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+
+{% endblock %}
+
