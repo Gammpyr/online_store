@@ -12,7 +12,7 @@
 			{% csrf_token %}
 			{{ form.as_p }}
 			<button class="btn btn-danger" type="submit">Удалить</button>
-			<a class="btn btn-secondary" href="{% url 'library:book_detail' book.pk %}">Отмена</a>
+			<a class="btn btn-secondary" href="{% url 'catalog:product_detail' product.pk %}">Отмена</a>
 		</form>
 	</div>
 

@@ -2,9 +2,9 @@
 
 {% block title %}Список продуктов{% endblock %}
 
-
 {% block content %}
 
+{% include 'catalog/header.html' %}
 <div class="row text-center mx-auto">
 	{% for product in products %}
 	<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
