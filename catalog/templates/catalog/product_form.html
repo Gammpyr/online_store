@@ -1,0 +1,16 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Форма для Продукта{% endblock %}
+
+{% block content %}
+	<div class="container mt-5 mx-auto text-center">
+		<h1 class="mb-4">Форма для Продукта</h1>
+		<form method="post">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button type="submit" class="btn btn-primary">Сохранить</button>
+			<a class="btn btn-secondary" href="{% url 'catalog:product_list'%}">Отмена</a>
+		</form>
+	</div>
+
+{% endblock %}
