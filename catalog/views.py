@@ -42,15 +42,6 @@ class ProductDeleteView(DeleteView):
     success_url = 'catalog:product_list'
 
 
-# def contacts(request):
-#     if request.method == 'POST':
-#         name = request.POST.get('name')
-#         phone = request.POST.get('phone')
-#         message = request.POST.get('message')
-#         return HttpResponse(f'Спасибо, {name}! <p>С вами скоро свяжутся.</p>')
-#
-#     return render(request, 'catalog/contacts.html')
-
 class ContactsView(TemplateView):
     template_name = "catalog/contacts.html"
 
@@ -59,6 +50,4 @@ class ContactsView(TemplateView):
         phone = request.POST.get('phone')
         message = request.POST.get('message')
 
-        return render(request, 'catalog/answer.html', {'name': name,'phone': phone})
-
-
+        return render(request, 'catalog/answer.html', {'name': name, 'phone': phone})
