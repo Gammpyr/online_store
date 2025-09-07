@@ -18,7 +18,7 @@
 				{% endif %}
 				<h1 class="card-title pricing-card-title">{{product.price}}</h1>
 				<p>{{product.description|linebreaks|truncatechars:100}}</p>
-				<a class="btn btn-lg btn-block  btn-outline-info" href="product/{{product.id}}" role="button">Подробнее</a><br>
+				<a class="btn btn-lg btn-block  btn-outline-info" href="{% url 'catalog:product_detail' product.pk %}" role="button">Подробнее</a><br>
 				<button type="button" class="btn btn-lg btn-block btn-outline-primary mt-2">Купить</button>
 
 			</div>

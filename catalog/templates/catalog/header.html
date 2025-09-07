@@ -1,6 +1,10 @@
 <header>
-	<div class="text-center mb-5">
+	<div class="container text-center">
 		<h1>Skystore</h1>
-		<p>Skystore - это отличный вариант хранения ваших плагинов и примеров кода, который вы бы хотели продать</p>
+		<p>Добро пожаловать в наш Магазин</p>
+		<nav>
+			<a href="{% url 'catalog:product_list' %}" class="btn btn-primary mb-4">Список продукт</a>
+			<a href="{% url 'catalog:product_create' %}" class="btn btn-primary mb-4">Добавить новый продукт</a>
+		</nav>
 	</div>
 </header>
