@@ -25,6 +25,9 @@ class ProductCreateView(CreateView):
     template_name = 'catalog/product_form.html'
     success_url = reverse_lazy('catalog:product_list')
 
+    def get_success_url(self):
+        return reverse('catalog:product_detail', kwargs={'pk': self.object.pk})
+
 
 class ProductUpdateView(UpdateView):
     model = Product
@@ -33,13 +36,13 @@ class ProductUpdateView(UpdateView):
     success_url = reverse_lazy('catalog:product_list')
 
     def get_success_url(self):
-        return reverse('catalog/product_detail.html', kwargs={'pk': self.object.pk})
+        return reverse('catalog:product_detail', kwargs={'pk': self.object.pk})
 
 
 class ProductDeleteView(DeleteView):
     model = Product
-    template_name = 'catalog/product_delete.html'
-    success_url = 'catalog:product_list'
+    template_name = 'catalog/product_confirm_delete.html'
+    success_url = reverse_lazy('catalog:product_list')
 
 
 class ContactsView(TemplateView):
@@ -51,3 +54,7 @@ class ContactsView(TemplateView):
         message = request.POST.get('message')
 
         return render(request, 'catalog/answer.html', {'name': name, 'phone': phone})
+
+
+class IndexView(TemplateView):
+    template_name = "catalog/index.html"
