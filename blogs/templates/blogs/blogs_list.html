@@ -1,0 +1,50 @@
+{% extends 'blogs/base.html' %}
+
+{% block title %}Список статей{% endblock %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+{% include 'blogs/header.html' %}
+
+
+<div class="btn-group mb-4 ms-3" role="group">
+    <a href="{% url 'blogs:blogs_list' %}?show_all=false"
+       class="btn btn-outline-warning {% if not show_all %}active{% endif %}">
+        Только опубликованные
+    </a>
+    <a href="{% url 'blogs:blogs_list' %}?show_all=true"
+       class="btn btn-outline-secondary {% if show_all %}active{% endif %}">
+        Все статьи
+    </a>
+</div>
+
+
+<div class="row text-center mx-auto">
+	{% for blog in blogs %}
+	<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+		<div class="card mb-4 box-shadow">
+			<div class="card-header">
+				<h4 class="my-0 font-weight-normal">{{blog.title}}</h4>
+			</div>
+			<div class="card-body">
+				{% if blog.image %}
+				<img class="img-thumbnail rounded" style="max-width: 100%; max-height: 200px;" src={{blog.image.url}}
+					 alt={{blog.title}}>
+				{% endif %}
+				<p>{{blog.content|linebreaks|truncatechars:100}}</p>
+				<div class=" me-4 position-absolute bottom-0 end-0">
+					<p><i class="bi bi-eye"></i> {{ blog.views_count }}</p>
+				</div>
+
+
+				<a class="btn btn-lg btn-block  btn-outline-warning" href="{% url 'blogs:blog_detail' blog.pk %}"
+				   role="button">Подробнее</a><br>
+
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,45 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Список статей{% endblock %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+{% include 'blogs/header.html' %}
+<div class="container">
+	<div class="row">
+		<div class="row">
+			<div class="card mb-4 box-shadow">
+				<div class="card-header">
+					<h4 class="my-0 font-weight-normal">{{blog.title}}</h4>
+				</div>
+				<div class="card-body">
+					{% if blog.image %}
+					<div class="text-center">
+						<img class="img-thumbnail rounded"
+							 style="max-width: 100%; max-height: 300px;"
+							 src={{blog.image.url}}
+							 alt={{blog.title}}>
+					</div>
+					{% endif %}
+
+					<p>{{blog.content|linebreaks}}</p>
+					<div class="d-flex justify-content-end">
+						<p><i class="bi bi-eye"></i> {{ blog.views_count }}</p>
+					</div>
+				</div>
+
+
+				<div class="d-grid gap-2">
+					<a class="btn btn-lg btn-block  btn-outline-info" href="{% url 'blogs:blog_update' blog.pk %}">Редактировать</a>
+					<a class="btn btn-lg btn-block  btn-outline-danger"
+					   href="{% url 'blogs:blog_delete' blog.pk %}">Удалить</a>
+					<a class="btn btn-lg btn-block  btn-outline-warning" href="{% url 'blogs:blogs_list' %}">Вернуться
+						назад</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+{% endblock %}

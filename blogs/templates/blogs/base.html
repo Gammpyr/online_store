@@ -3,16 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}Skystore{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <title>{% block title %}SkyBlog{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
 </head>
 <body>
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-    <h5 class="my-0 mr-md-auto font-weight-normal">SkyStore</h5>
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-yellow border-bottom box-shadow">
+    <h5 class="my-0 mr-md-auto font-weight-normal">SkyBlog </h5>
 
     <nav class="ms-5">
-        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:product_list' %}">Каталог</a>
-		<a class="p-2 btn btn-outline-warning" href="{% url 'blogs:blogs_list' %}">Статьи</a>
+		<a class="p-2 btn btn-outline-primary" href="{% url 'catalog:product_list' %}">Товары</a>
+        <a class="p-2 btn btn-outline-warning" href="{% url 'blogs:blogs_list' %}">Статьи</a>
+
         <a class="p-2 btn btn-outline-info" href="/contacts/">Контакты</a>
     </nav>
 </div>
@@ -31,14 +32,13 @@
 			<div class="col-6 col-md">
 				<h5>Категории</h5>
 				<ul class="list-unstyled text-small">
-					<li><a class="text-muted" href="#">Телефоны</a></li>
-					<li><a class="text-muted" href="#">Телевизоры</a></li>
+					<li><a class="text-muted" href="#">Cтатьи</a></li>
 				</ul>
 			</div>
 			<div class="col-6 col-md">
 				<h5>Дополнительно</h5>
 				<ul class="list-unstyled text-small">
-					<li><a class="text-muted" href="{% url 'blogs:blogs_list' %}">Мы пишем</a></li>
+					<li><a class="text-muted" href="#">Мы пишем</a></li>
 				</ul>
 			</div>
 			<div class="col-6 col-md">
