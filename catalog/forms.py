@@ -3,13 +3,16 @@ from django.core.exceptions import ValidationError
 
 from .models import Product
 
-ban_words = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар', ]
+BAN_WORDS = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар', ]
 
 
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ['name', 'description', 'category', 'price', 'image', ]
+        widgets = {
+            'category': forms.Select(attrs={'class': 'form-select'}),
+        }
 
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)
@@ -25,9 +28,9 @@ class ProductForm(forms.ModelForm):
             'style': 'height: 80px;',
         })
 
-        self.fields['category'].widget.attrs.update({
-            'class': 'form-control',
-        })
+        # self.fields['category'].widget.attrs.update({
+        #     'class': 'form-control',
+        # })
 
         self.fields['price'].widget.attrs.update({
             'class': 'form-control',
@@ -40,14 +43,14 @@ class ProductForm(forms.ModelForm):
 
     def clean_name(self):
         name = self.cleaned_data.get('name')
-        for word in ban_words:
+        for word in BAN_WORDS:
             if word.lower() in name.lower():
                 raise ValidationError(f'Нельзя использовать слово {word} в названии товара')
         return name
 
     def clean_description(self):
         description = self.cleaned_data.get('description')
-        for word in ban_words:
+        for word in BAN_WORDS:
             if word.lower() in description.lower():
                 raise ValidationError(f'Нельзя использовать слово {word} в описании товара')
         return description
