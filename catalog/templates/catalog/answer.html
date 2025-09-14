@@ -1,0 +1,13 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Спасибо!{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-light">
+        <h4>Спасибо, {{ name }}!</h4>
+        <p>Ваше сообщение получено. Мы свяжемся с вами по телефону {{ phone }} в ближайшее время.</p>
+        <a href="/contacts/" class="btn btn-info">Вернуться к контактам</a>
+    </div>
+</div>
+{% endblock %}

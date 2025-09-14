@@ -1,0 +1,17 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Список статей{% endblock %}
+
+{% block content %}
+{% include 'blogs/header.html' %}
+	<div class="container mt-5 mx-auto text-center">
+		<h1 class="mb-4">Форма для Продукта</h1>
+		<form method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button type="submit" class="btn btn-warning">Сохранить</button>
+			<a class="btn btn-secondary" href="{% url 'blogs:blogs_list'%}">Отмена</a>
+		</form>
+	</div>
+
+{% endblock %}

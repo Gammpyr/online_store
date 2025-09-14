@@ -1,0 +1,10 @@
+<header>
+	<div class="container text-center">
+		<h1>SkyBlog</h1>
+		<p>Добро пожаловать в наш Блог!</p>
+		<nav>
+			<a href="{% url 'blogs:blogs_list' %}" class="btn btn-warning mb-4">Список статей</a>
+			<a href="{% url 'blogs:blog_create' %}" class="btn btn-warning mb-4">Добавить новую статью</a>
+		</nav>
+	</div>
+</header>

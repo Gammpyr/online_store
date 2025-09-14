@@ -1,0 +1,18 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Контакты{% endblock %}
+
+{% block content %}
+<div class="container">
+	<h1>Добро пожаловать на Sky!</h1>
+	<div class="container mt-5">
+		<div class="alert alert-light">
+			<h4>Добро пожаловать на Sky!</h4>
+			<p>Ваше сообщение получено. Мы свяжемся с вами по телефону выберите куда вы хотите перейти:</p>
+		</div>
+		<a href="{% url 'blogs:blogs_list' %}" class="btn btn-warning">Наш Блог</a>
+		<a href="{% url 'catalog:product_list' %}" class="btn btn-primary">Наш Магазин</a>
+
+	</div>
+</div>
+{% endblock %}
