@@ -6,11 +6,12 @@
 {% include 'catalog/header.html' %}
 	<div class="container mt-5 mx-auto text-center">
 		<h1 class="mb-4">Форма Продукта</h1>
-		<form method="post" enctype="multipart/form-data">
+		<form method="post" enctype="multipart/form-data" class="p-3 border rounded shadow-sm" style="max-width: 600px; margin: auto;">
 			{% csrf_token %}
+			{{ form.non_field_errors }}
 			{{ form.as_p }}
-			<button type="submit" class="btn btn-warning">Сохранить</button>
-			<a class="btn btn-secondary" href="{% url 'catalog:product_list'%}">Отмена</a>
+			<button type="submit" class="btn btn-primary">Сохранить</button>
+			<a class="btn btn-primary" href="{% url 'catalog:product_list'%}">Отмена</a>
 		</form>
 	</div>
 
