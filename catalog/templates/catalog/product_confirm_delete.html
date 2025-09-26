@@ -4,9 +4,9 @@
 
 {% block content %}
 {% include 'catalog/header.html' %}
-	<div class="container mt-5">
+	<div class="container mx-auto p-3 border rounded shadow-sm text-center">
 		<h1 class="mb-4">Удалить продукт "{{product.name}}"</h1>
-		<p>Вы хотите удалить продукт "{{product.name}}"?</p>
+		<p>Вы точно хотите удалить продукт "{{product.name}}"?</p>
 
 		<form method="post">
 			{% csrf_token %}

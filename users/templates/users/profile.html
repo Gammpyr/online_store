@@ -1,0 +1,23 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+{% include 'catalog/header.html' %}
+<div class="container mt-5 mx-auto text-center">
+	<h1 class="mb-4">Профиль пользователя <br>{{ user.username }}</h1>
+</div>
+<div class="container mx-auto p-3 border rounded shadow-sm text-center" style="max-width: 500px;">
+
+	{% if user.avatar %}
+	<img class="img-thumbnail rounded" style="max-width: 100%; max-height: 300px;" src={{user.avatar.url}} alt={{user.username}}>
+	{% endif %}
+	<p>Имя: {{ user.first_name }}</p>
+	<p>Фамилия: {{ user.last_name }}</p>
+	<p>Страна: {{ user.country }}</p>
+	<p>Почта: {{ user.email }}</p>
+	<p>Номер телефона: {{ user.phone_number }}</p>
+
+
+</div>
+{% endblock %}
