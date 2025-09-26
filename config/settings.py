@@ -143,3 +143,5 @@ LOGIN_REDIRECT_URL = 'catalog:product_list'
 LOGOUT_REDIRECT_URL = 'catalog:product_list'
 
 LOGIN_URL = 'users:login'
+
+FIXTURE_DIRS = [BASE_DIR / 'fixtures']
