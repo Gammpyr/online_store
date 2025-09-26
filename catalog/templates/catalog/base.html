@@ -19,7 +19,7 @@
 		<ul class="nav nav-pills">
 			{% if user.is_authenticated %}
 			<li class="nav-item dropdown">
-				<a class="nav-link" href="#">{{ user.username }} ({{ user.email }})</a>
+				<a class="nav-link" href="{% url 'users:profile' %}">{{ user.username }} ({{ user.email }})</a>
 			</li>
 			<li class="nav-item dropdown">
 				<form method="post" action="{% url 'users:logout' %}">
