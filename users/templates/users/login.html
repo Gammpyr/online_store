@@ -1,12 +1,12 @@
 {% extends 'catalog/base.html' %}
 
-{% block title %}Логин{% endblock %}
+{% block title %}Авторизация{% endblock %}
 
 {% block content %}
 {% include 'catalog/header.html' %}
 <div class="container mt-5">
-	<h1 class="mb-4">Логин</h1>
-	<form method="post">
+	<h1 class="mb-4 text-center">Авторизация</h1>
+	<form method="post" enctype="multipart/form-data" class="p-3 border rounded shadow-sm" style="max-width: 600px; margin: auto;">
 		{% csrf_token %}
 		{{ form.as_p }}
 		<button type="submit" class="btn btn-primary">Войти</button>
