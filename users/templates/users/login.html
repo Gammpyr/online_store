@@ -1,0 +1,17 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Логин{% endblock %}
+
+{% block content %}
+{% include 'catalog/header.html' %}
+<div class="container mt-5">
+	<h1 class="mb-4">Логин</h1>
+	<form method="post">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit" class="btn btn-primary">Войти</button>
+<!--		<a class="btn btn-secondary" href="{{ request.META.HTTP_REFERER |default:'catalog/product_list' }}">Отмена</a>-->
+	</form>
+</div>
+
+{% endblock %}
