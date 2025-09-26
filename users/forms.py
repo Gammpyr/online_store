@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 from .models import CustomUser
 
@@ -78,3 +78,28 @@ class CustomUserCreationForm(UserCreationForm):
         if country and not country.isalpha():
             raise forms.ValidationError('Страна должна состоять только из букв')
         return country
+
+class CustomAuthenticationForm(AuthenticationForm):
+    error_messages = {
+        'invalid_login': (
+            'Пожалуйста, введите правильную почту и пароль. Обратите внимание, '
+            'что оба поля чувствительны к регистру.'
+        ),
+        'inactive': "Этот аккаунт неактивен.",
+    }
+
+    username = forms.EmailField(
+        label='Почта',
+        widget=forms.EmailInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Введите вашу почту',
+            'autofocus': True,
+        })
+    )
+    password = forms.CharField(
+        label='Пароль',
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Введите пароль',
+        })
+    )

@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth import login
 from django.core.mail import send_mail
 from django.urls import reverse_lazy
+from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 
 from .forms import CustomUserCreationForm
@@ -23,3 +24,6 @@ class RegisterView(FormView):
         message = f'{user.display_name.title()}, спасибо, что зарегистрировались в нашем сервисе!'
         recipient_list = [user.email]
         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recipient_list)
+
+class ProfileView(TemplateView):
+    template_name = 'users/profile.html'
