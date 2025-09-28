@@ -11,7 +11,7 @@
 			{{ form.non_field_errors }}
 			{{ form.as_p }}
 			<button type="submit" class="btn btn-primary">Сохранить</button>
-			<a class="btn btn-primary" href="{% url 'catalog:product_list'%}">Отмена</a>
+			<a class="btn btn-primary" href="{% url 'catalog:product_detail' product.pk %}">Отмена</a>
 		</form>
 	</div>
 
