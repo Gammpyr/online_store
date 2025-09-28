@@ -1,10 +1,18 @@
 <header>
 	<div class="container text-center">
 		<h1>SkyStore</h1>
-		<p>Добро пожаловать в наш Магазин!</p>
+		{% if user.is_authenticated %}
+		<p>Добро пожаловать в наш магазин, {{ user.first_name|title }}!</p>
 		<nav>
 			<a href="{% url 'catalog:product_list' %}" class="btn btn-primary mb-4">Список продуктов</a>
 			<a href="{% url 'catalog:product_create' %}" class="btn btn-primary mb-4">Добавить новый продукт</a>
 		</nav>
+		{% else %}
+		<p>Добро пожаловать в наш Магазин!</p>
+		<nav>
+			<a href="{% url 'catalog:product_list' %}" class="btn btn-primary mb-4">Список продуктов</a>
+		</nav>
+		{% endif %}
+
 	</div>
 </header>
