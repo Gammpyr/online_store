@@ -11,7 +11,11 @@
 			{{ form.non_field_errors }}
 			{{ form.as_p }}
 			<button type="submit" class="btn btn-primary">Сохранить</button>
-			<a class="btn btn-primary" href="{% url 'catalog:product_detail' product.pk %}">Отмена</a>
+			{% if product.pk %}
+				<a class="btn btn-primary" href="{% url 'catalog:product_detail' product.pk %}">Отмена</a>
+			{% else %}
+				<a class="btn btn-primary" href="{% url 'catalog:product_list' %}">Отмена</a>
+			{% endif %}
 		</form>
 	</div>
 
