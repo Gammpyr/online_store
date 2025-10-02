@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.models import CustomUser
+
 
 class Category(models.Model):
     name = models.CharField(max_length=150, verbose_name='Название')
@@ -22,6 +24,8 @@ class Product(models.Model):
     price = models.DecimalField(default=0.0, max_digits=11, decimal_places=2, verbose_name='Цена')
     created_at = models.DateField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateField(auto_now=True, verbose_name='Дата изменения')
+    is_published = models.BooleanField(default=False, verbose_name='Опубликован')
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='products', verbose_name='Владелец')
 
     def __str__(self):
         return f'{self.name}'
@@ -30,3 +34,6 @@ class Product(models.Model):
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
         ordering = ['name', ]
+        permissions = [
+            ('can_unpublish_product', 'Может отменить публикацию продукта'),
+        ]
