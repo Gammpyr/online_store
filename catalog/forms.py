@@ -1,5 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 from .models import Product
 
@@ -9,7 +10,7 @@ BAN_WORDS = ['казино', 'криптовалюта', 'крипта', 'бир
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'description', 'category', 'price', 'image', ]
+        fields = ['name', 'description', 'category', 'price', 'image', 'is_published',]
         widgets = {
             'category': forms.Select(attrs={'class': 'form-select'}),
         }
@@ -41,6 +42,12 @@ class ProductForm(forms.ModelForm):
             'placeholder': 'Изображение товара',
         })
 
+        self.fields['is_published'].widget.attrs.update({
+            'class': 'form-check-input',
+            'checked': False,
+
+        })
+
     def clean_name(self):
         name = self.cleaned_data.get('name')
         for word in BAN_WORDS:
@@ -64,9 +71,10 @@ class ProductForm(forms.ModelForm):
     def clean_image(self):
         if self.cleaned_data.get('image'):
             image = self.cleaned_data.get('image')
-            if image.size > 5000000:
-                raise ValidationError('Размер изображения не должен превышать 5 МБ')
-            if image.content_type not in ['image/jpeg', 'image/png']:
-                raise ValidationError('Изображение должно быть в формате JPEG или PNG')
+            if isinstance(image, InMemoryUploadedFile):
+                if image.size > 5000000:
+                    raise ValidationError('Размер изображения не должен превышать 5 МБ')
+                if image.content_type not in ['image/jpeg', 'image/png']:
+                    raise ValidationError('Изображение должно быть в формате JPEG или PNG')
             return image
         return None

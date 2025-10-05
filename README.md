@@ -22,13 +22,10 @@
 ```
 
 Импортируйте тестовые данные:
-```bash
-    python manage.py loaddata fixtures/catalog_data.json
 ```
-или
-```bash
-    python manage.py loaddata fixtures/blogs_data.json
+    python manage.py loaddata fixtures/data_name.json
 ```
+
 
 Запустите сервер разработки:
 
