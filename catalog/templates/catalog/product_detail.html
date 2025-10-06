@@ -25,7 +25,7 @@
 						<button type="button" class="btn btn-lg btn-outline-primary">Купить</button>
 						<a class="btn btn-lg btn-block  btn-outline-secondary" href="{% url 'catalog:product_list' %}">Вернуться назад</a>
 
-						{% if is_moderator or product.owner == user %}
+						{% if is_moderator or user.is_superuser or product.owner == user %}
 							<br>
 								<form method="post" action="{% url 'catalog:toggle_publish' product.pk %}">
 									{% csrf_token %}
@@ -41,7 +41,7 @@
 								</form>
 							<br>
 
-							{% if product.owner == user %}
+							{% if product.owner == user or user.is_superuser%}
 								<a class="btn btn-lg btn-block  btn-outline-info" href="{% url 'catalog:product_update' product.pk %}">Редактировать</a>
 							{% endif %}
 							<a class="btn btn-lg btn-block  btn-outline-danger" href="{% url 'catalog:product_delete' product.pk %}">Удалить</a>
