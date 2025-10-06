@@ -5,9 +5,14 @@ from django.views import View
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
+from django.core.cache import cache
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 from catalog.forms import ProductForm
-from catalog.models import Product
+from catalog.models import Product, Category
+from catalog.services import get_category_products
+from config.settings import CACHE_ENABLED
 
 
 class ProductListView(ListView):
@@ -15,7 +20,20 @@ class ProductListView(ListView):
     template_name = 'catalog/product_list.html'
     context_object_name = 'products'
 
+    def get_queryset(self):
+        category_id = self.kwargs.get('category_id')
 
+        return get_category_products(category_id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all().order_by('name')
+        category_id = self.kwargs.get('category_id')
+        # category_id = self.request.GET.get('category_id')
+        context['current_category'] = Category.objects.filter(id=category_id).first()
+        return context
+
+@method_decorator(cache_page(60 * 15), name='dispatch')
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
     template_name = 'catalog/product_detail.html'
@@ -25,7 +43,7 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         product = self.object
         user = self.request.user
-        context['is_moderator'] = user.groups.filter(name='Модератор продуктов').exists()
+        context['is_moderator'] = user.is_superuser or user.groups.filter(name='Модератор продуктов').exists()
         return context
 
 
@@ -48,6 +66,7 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ProductForm
     template_name = 'catalog/product_form.html'
     success_url = reverse_lazy('catalog:product_list')
+
     # permission_required = 'catalog.change_product'
     #
     # def get_object(self, queryset=None):
@@ -68,7 +87,7 @@ class ProductDeleteView(PermissionRequiredMixin, LoginRequiredMixin, DeleteView)
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset)
-        if obj.owner != self.request.user and not self.request.user.groups.filter(name='Модератор продуктов').exists():
+        if obj.owner != self.request.user and not (self.request.user.groups.filter(name='Модератор продуктов').exists() or self.request.user.is_superuser):
             raise PermissionDenied("У вас нет прав на удаление этого продукта")
         return obj
 
@@ -92,8 +111,10 @@ class ProductTogglePublishView(LoginRequiredMixin, View):
 
     def post(self, request, pk):
         product = get_object_or_404(Product, pk=pk)
-
-        if product.owner != request.user and not request.user.groups.filter(name='Модератор продуктов').exists():
+        if product.owner != request.user and not (
+                self.request.user.is_superuser or
+                self.request.user.groups.filter(name='Модератор продуктов').exists()
+        ):
             raise PermissionDenied("У вас нет прав на изменение статуса публикации")
 
         is_published = request.POST.get('is_published') == 'true'
