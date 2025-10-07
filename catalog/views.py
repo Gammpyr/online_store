@@ -27,7 +27,7 @@ class ProductListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all().order_by('name')
+        context['categories'] = Category.objects.order_by('name')
         category_id = self.kwargs.get('category_id')
         # category_id = self.request.GET.get('category_id')
         context['current_category'] = Category.objects.filter(id=category_id).first()
@@ -87,7 +87,7 @@ class ProductDeleteView(PermissionRequiredMixin, LoginRequiredMixin, DeleteView)
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset)
-        if obj.owner != self.request.user and not (self.request.user.groups.filter(name='Модератор продуктов').exists() or self.request.user.is_superuser):
+        if not self.request.user.is_superuser or obj.owner != self.request.user or not self.request.user.groups.filter(name='Модератор продуктов').exists():
             raise PermissionDenied("У вас нет прав на удаление этого продукта")
         return obj
 
