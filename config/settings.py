@@ -146,10 +146,14 @@ LOGIN_URL = 'users:login'
 
 FIXTURE_DIRS = [BASE_DIR / 'fixtures']
 
-CACHE_ENABLED = True
+CACHE_ENABLED = True if os.getenv('CACHE_ENABLED') == 'True' else False
+
+REDIS_HOST = os.getenv('REDIS_HOST')
+REDIS_PORT = os.getenv('REDIS_PORT')
+
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',
+        'LOCATION': f'redis://{REDIS_HOST}:{REDIS_PORT}/1',
     }
 }
