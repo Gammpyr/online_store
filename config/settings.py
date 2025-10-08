@@ -146,7 +146,7 @@ LOGIN_URL = 'users:login'
 
 FIXTURE_DIRS = [BASE_DIR / 'fixtures']
 
-CACHE_ENABLED = True if os.getenv('CACHE_ENABLED') == 'True' else False
+CACHE_ENABLED = os.getenv('CACHE_ENABLED', 'False').lower() == 'true'
 
 REDIS_HOST = os.getenv('REDIS_HOST')
 REDIS_PORT = os.getenv('REDIS_PORT')
