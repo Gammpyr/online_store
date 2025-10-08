@@ -5,6 +5,22 @@
 {% block content %}
 
 {% include 'catalog/header.html' %}
+
+<div class="row text-center mb-4">
+	<div class="col-md-12">
+		<div class="btn-group">
+			<a href="{% url 'catalog:product_list' %}"
+			   class="btn btn-outline-primary {% if not current_category %}active{% endif %}" aria-current="page">Все</a>
+			{% for category in categories %}
+			<a href="{% url 'catalog:product_category_list' category.id %}"
+			   class="btn btn-outline-primary {% if current_category and category.id == current_category.id %}active{% endif %}">
+				{{ category.name }}</a>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+
 <div class="row text-center mx-auto">
 	{% for product in products %}
 	<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
@@ -14,11 +30,13 @@
 			</div>
 			<div class="card-body">
 				{% if product.image %}
-					<img class="img-thumbnail rounded" style="max-width: 100%; max-height: 200px;" src={{product.image.url}} alt={{product.name}}>
+				<img class="img-thumbnail rounded" style="max-width: 100%; max-height: 200px;" src={{product.image.url}}
+					 alt={{product.name}}>
 				{% endif %}
 				<h1 class="card-title pricing-card-title">{{product.price}}</h1>
 				<p>{{product.description|linebreaks|truncatechars:100}}</p>
-				<a class="btn btn-lg btn-block  btn-outline-info" href="{% url 'catalog:product_detail' product.pk %}" role="button">Подробнее</a><br>
+				<a class="btn btn-lg btn-block  btn-outline-info" href="{% url 'catalog:product_detail' product.pk %}"
+				   role="button">Подробнее</a><br>
 				<button type="button" class="btn btn-lg btn-block btn-outline-primary mt-2">Купить</button>
 
 			</div>
