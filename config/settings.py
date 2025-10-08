@@ -145,3 +145,15 @@ LOGOUT_REDIRECT_URL = 'catalog:product_list'
 LOGIN_URL = 'users:login'
 
 FIXTURE_DIRS = [BASE_DIR / 'fixtures']
+
+CACHE_ENABLED = os.getenv('CACHE_ENABLED', 'False').lower() == 'true'
+
+REDIS_HOST = os.getenv('REDIS_HOST')
+REDIS_PORT = os.getenv('REDIS_PORT')
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': f'redis://{REDIS_HOST}:{REDIS_PORT}/1',
+    }
+}
